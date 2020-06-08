@@ -1,0 +1,27 @@
+server:
+  port: 8084
+  max-http-header-size: 20480
+
+spring:
+  application:
+    name: goodsdetail-service
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 10 #拉取服务的时间间隔
+  instance:
+    lease-expiration-duration-in-seconds: 15 #每个5秒发送一次心跳给eureka
+    lease-renewal-interval-in-seconds: 5 #10秒不发送就过期
+
+# feign调用超时时间配置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 600000

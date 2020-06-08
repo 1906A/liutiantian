@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: upload-service
+  servlet:
+    multipart:
+      max-file-size: 1MB
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+
+user:
+  httpImageYuming: http://image.leyou.com/

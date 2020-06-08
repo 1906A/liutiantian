@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leyou.dao.SpuMapper">
+<select id="findSpuByPage" resultType="com.leyou.pojo.SpuVO">
+    SELECT
+    s.*,
+    s.sub_title as subTitle,
+    s.brand_id as brandId,
+    s.create_time as createTime,
+	b.name AS bname,
+	CONCAT_WS("/",c1.name,c2.name,c3.name) AS cname
+FROM
+	tb_spu s,tb_brand b,tb_category c1,tb_category c2,tb_category c3
+<where>
+    s.brand_id=b.id AND s.cid1=c1.id AND s.cid2=c2.id AND s.cid3=c3.id and s.valid=1
+    <if test="key != null and key != ''">
+       and (s.title like '%${key}%'
+        or b.name like '%${key}%')
+    </if>
+    <if test="saleable!=2">
+        and s.saleable=#{saleable}
+    </if>
+
+</where>
+
+</select>
+</mapper>
