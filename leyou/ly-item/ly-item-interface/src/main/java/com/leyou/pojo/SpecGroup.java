@@ -13,15 +13,15 @@ public class SpecGroup {
     private Long id;
     private Long cid;
     private String name;
-    private List<SpecParam> paramList;
+    private List<SpecParam> params;
 
 
-    public List<SpecParam> getParamList() {
-        return paramList;
+    public List<SpecParam> getParams() {
+        return params;
     }
 
-    public void setParamList(List<SpecParam> paramList) {
-        this.paramList = paramList;
+    public void setParams(List<SpecParam> params) {
+        this.params = params;
     }
 
     public SpecGroup(Long id, Long cid, String name) {

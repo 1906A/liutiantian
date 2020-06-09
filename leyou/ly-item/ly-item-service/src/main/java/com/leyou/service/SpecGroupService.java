@@ -36,7 +36,7 @@ public class SpecGroupService {
         groupList.forEach(group->{
             SpecParam param= new SpecParam();
             param.setGroupId(group.getId());
-            group.setParamList(specParamMapper.select(param));
+            group.setParams(specParamMapper.select(param));
         });
         return  groupList;
     }
