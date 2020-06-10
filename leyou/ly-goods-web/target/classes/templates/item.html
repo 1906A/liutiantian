@@ -627,7 +627,7 @@
 			paramMap,
 			skus,
 			indexes,
-			groups
+
 		},
 		computed:{
 			sku(){
@@ -641,7 +641,7 @@
 				groups.forEach(group =>{
 					group.params.forEach(param =>{
 						if(param.generic){
-							param.value = genericSpec[param.id];
+							param.value = this.genericSpec[param.id];
 						}else{
 							param.value = JSON.parse(this.sku.ownSpec)[param.id];
 						}

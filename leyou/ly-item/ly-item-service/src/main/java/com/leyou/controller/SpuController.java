@@ -57,4 +57,10 @@ public class SpuController {
         return spuService.findSpuById(spuId);
     }
 
+    @RequestMapping("findSpuBySpuId")
+    //根据spuId查询spuVo
+    public SpuVO findSpuBySpuId(@RequestParam("spuId")Long spuId){
+
+        return  spuService.findSpuBySpuId(spuId);
+    }
 }

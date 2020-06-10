@@ -1,30 +1,21 @@
 package com.leyou.controller;
 
 import com.leyou.client.*;
-import com.leyou.pojo.*;
+import com.leyou.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class GoodsDetailController {
+
     @Autowired
-    SpuClient spuClient;
-    @Autowired
-    SkuClient skuClient;
-    @Autowired
-    SpecClient specClient;
-    @Autowired
-    CategoryClient categoryClient;
-    @Autowired
-    BrandClient brandClient;
+    GoodsService goodsService;
 
     //请求商品详情微服务
     /*用到的表
@@ -38,7 +29,7 @@ public class GoodsDetailController {
     * */
     @RequestMapping("item/{spuId}.html")
     public String item(@PathVariable("spuId") Long spuId,Model model){
-        //查询spu
+        /*//查询spu
         Spu spu = spuClient.findSpuById(spuId);
         model.addAttribute("spu",spu);
         //查询spudetail
@@ -64,7 +55,14 @@ public class GoodsDetailController {
         model.addAttribute("paramMap",paramMap);
         //查询brand
         Brand brand = brandClient.findBrandById(spu.getBrandId());
-        model.addAttribute("brand",brand);
+        model.addAttribute("brand",brand);*/
+
+        //查询数据
+        Map<String,Object> map = goodsService.item(spuId);
+        model.addAllAttributes(map);
+
+        //写入静态文件
+        goodsService.createHtml(spuId);
         return "item";
     }
 }

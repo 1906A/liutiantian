@@ -24,4 +24,20 @@ FROM
 </where>
 
 </select>
+
+
+    <select id="findSpuBySpuId" resultType="com.leyou.pojo.SpuVO">
+        SELECT
+        s.*,
+        s.sub_title as subTitle,
+        s.brand_id as brandId,
+        s.create_time as createTime,
+        b.name AS bname,
+        CONCAT_WS("/",c1.name,c2.name,c3.name) AS cname
+        FROM
+        tb_spu s,tb_brand b,tb_category c1,tb_category c2,tb_category c3
+        <where>
+            s.brand_id=b.id AND s.cid1=c1.id AND s.cid2=c2.id AND s.cid3=c3.id and s.valid=1 and s.id=#{spuId}
+        </where>
+    </select>
 </mapper>

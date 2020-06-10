@@ -10,4 +10,6 @@ import java.util.List;
 @org.apache.ibatis.annotations.Mapper
 public interface SpuMapper extends Mapper<Spu> {
     List<SpuVO> findSpuByPage(@Param("key") String key, @Param("saleable") Integer saleable);
+
+    SpuVO findSpuBySpuId(Long spuId);
 }

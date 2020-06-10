@@ -9,6 +9,7 @@ import com.leyou.client.SkuClient;
 import com.leyou.client.SpecClient;
 import com.leyou.client.SpuClient;
 import com.leyou.pojo.*;
+import com.leyou.repository.GoodsRepository;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class GoodsService {
     private SpecClient specClient;
     @Autowired
     private SpuClient spuClient;
+    @Autowired
+    GoodsRepository goodsRepository;
 
     private static final ObjectMapper MAPPER=new ObjectMapper();
 
@@ -131,5 +134,19 @@ public class GoodsService {
             }
         }
         return result;
+    }
+
+    //rabbitmq监听修改消息
+    public void editEsData(Long spuId) throws JsonProcessingException {
+        //根据spuid查询spu
+        SpuVO spuVO = spuClient.findSpuBySpuId(spuId);
+        //spu转换成goods
+        Goods goods = this.convert(spuVO);
+        //持久化到es
+        goodsRepository.save(goods);
+    }
+
+    public void deleteEsData(Long spuId) {
+        goodsRepository.deleteById(spuId);
     }
 }

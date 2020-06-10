@@ -20,4 +20,7 @@ public interface SpuClientServer {
     //根据id查找spu
     @RequestMapping("findSpuById")
     public Spu findSpuById(@RequestParam("spuId") Long spuId);
+    //根据spuId查询spuVo
+    @RequestMapping("findSpuBySpuId")
+    public SpuVO findSpuBySpuId(@RequestParam("spuId")Long spuId);
 }
